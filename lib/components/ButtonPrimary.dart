@@ -5,11 +5,12 @@ class PrimaryButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final bool isOutlined;
-  final IconData? icon;
-  final double? height;
+  final Widget? icon;
   final double? width;
-  final Color? color;
+  final Color? bgColor;
   final Color? textColor;
+  final Color? borderColor;
+  final EdgeInsetsGeometry? padding;
 
   const PrimaryButton({
     super.key,
@@ -17,46 +18,46 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.isOutlined = false,
     this.icon,
-    this.height,
     this.width,
-    this.color,
+    this.bgColor,
     this.textColor,
+    this.borderColor,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
-    final buttonHeight = height ?? 48.h;
     final buttonWidth = width ?? double.infinity;
-
-    final bgColor = color ?? Colors.orange;
-    final txtColor = textColor ?? Colors.white;
 
     return SizedBox(
       width: buttonWidth,
-      height: buttonHeight,
       child: ElevatedButton.icon(
         onPressed: onPressed,
-        icon: icon != null ? Icon(icon, size: 18.sp) : const SizedBox.shrink(),
+        icon: icon,
         label: Text(
           text,
           style: TextStyle(
-            fontSize: 14.sp,
+            fontSize: 15.sp,
             fontWeight: FontWeight.w600,
-            color: isOutlined ? bgColor : txtColor,
+            color: textColor,
           ),
           textAlign: TextAlign.center,
         ),
         style: ElevatedButton.styleFrom(
+          alignment: Alignment.center,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           elevation: 0,
-          backgroundColor: isOutlined ? Colors.white : bgColor,
-          foregroundColor: isOutlined ? bgColor : txtColor,
-          side: isOutlined
-              ? BorderSide(color: bgColor, width: 1.5.w)
+          backgroundColor: bgColor,
+          foregroundColor: bgColor,
+          side: (isOutlined && borderColor != null)
+              ? BorderSide(color: borderColor ?? Colors.white, width: 1.w)
               : BorderSide.none,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.r),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+          padding:
+              padding ?? EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
         ),
       ),
     );

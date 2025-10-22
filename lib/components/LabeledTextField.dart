@@ -43,14 +43,17 @@ class LabeledTextField extends StatelessWidget {
             text: label,
             style: baseStyle?.copyWith(
               fontWeight: FontWeight.w700,
+              color: Colors.grey,
               fontSize: 13.sp,
-              color: Colors.grey.shade800,
             ),
             children: isRequired
                 ? [
                     TextSpan(
                       text: " *",
-                      style: TextStyle(color: Colors.red, fontSize: 13.sp),
+                      style: baseStyle?.copyWith(
+                        color: Colors.red,
+                        fontSize: 13.sp,
+                      ),
                     ),
                   ]
                 : [],
@@ -68,11 +71,15 @@ class LabeledTextField extends StatelessWidget {
           keyboardType: textType ?? TextInputType.text,
           inputFormatters: inputFormatters,
           maxLines: maxLines,
-          style: TextStyle(fontSize: 14.sp, color: Colors.black87),
+          style: TextStyle(
+            fontSize: 15.sp,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
           decoration: InputDecoration(
             isDense: true,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 13.sp),
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 15.sp),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),

@@ -36,12 +36,13 @@ class LabeledMultilineTextField extends StatelessWidget {
             style: baseStyle!.copyWith(
               color: Colors.grey,
               fontWeight: FontWeight.w700,
+              fontSize: 13.sp,
             ),
             children: [
               if (isRequired)
-                const TextSpan(
+                TextSpan(
                   text: ' *',
-                  style: TextStyle(color: Colors.red),
+                  style: baseStyle.copyWith(color: Colors.red, fontSize: 13.sp),
                 ),
             ],
           ),
@@ -51,6 +52,11 @@ class LabeledMultilineTextField extends StatelessWidget {
           controller: controller,
           minLines: minLines,
           maxLines: maxLines,
+          style: TextStyle(
+            fontSize: 15.sp,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
           decoration: InputDecoration(
             hintText: hintText ?? '',
             hintStyle: TextStyle(color: Colors.grey),
@@ -78,7 +84,7 @@ class LabeledMultilineTextField extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             helperText!,
-            style: TextStyle(fontSize: 12.sp, color: Colors.grey[600]),
+            style: TextStyle(fontSize: 13.sp, color: Colors.grey[600]),
           ),
         ],
       ],

@@ -36,7 +36,7 @@ class LabeledDropdown<T> extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.grey.shade500,
                   fontStyle: FontStyle.italic,
-                  fontSize: 14.sp,
+                  fontSize: 13.sp,
                 ),
               ),
             ),
@@ -52,30 +52,37 @@ class LabeledDropdown<T> extends StatelessWidget {
             style: baseStyle?.copyWith(
               fontWeight: FontWeight.w700,
               color: Colors.grey,
-              fontSize: 15.sp,
+              fontSize: 13.sp,
             ),
             children: isRequired
                 ? [
                     TextSpan(
                       text: " *",
-                      style: TextStyle(color: Colors.red, fontSize: 15.sp),
+                      style: baseStyle?.copyWith(
+                        color: Colors.red,
+                        fontSize: 13.sp,
+                      ),
                     ),
                   ]
                 : [],
           ),
         ),
         SizedBox(height: 6.h),
-
         DropdownButtonFormField2<T>(
           value: hasData ? value : null,
           onChanged: hasData ? onChanged : (val) {},
           items: effectiveItems,
           isExpanded: true,
+          style: baseStyle?.copyWith(
+            fontSize: 15.sp,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
           decoration: InputDecoration(
             isDense: true,
             contentPadding: EdgeInsets.symmetric(
-              vertical: 4.h,
-              horizontal: 10.w,
+              vertical: 0.h,
+              horizontal: 0.w,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
@@ -92,7 +99,7 @@ class LabeledDropdown<T> extends StatelessWidget {
           ),
           hint: Text(
             hasData ? (hintText ?? "") : "Chưa có dữ liệu",
-            style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+            style: TextStyle(color: Colors.grey, fontSize: 13.sp),
           ),
           buttonStyleData: ButtonStyleData(
             padding: EdgeInsets.only(right: 8.w),
