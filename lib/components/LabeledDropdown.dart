@@ -6,27 +6,44 @@ class LabeledDropdown<T> extends StatelessWidget {
   final String label;
   final bool isRequired;
   final String? hintText;
-  final List<DropdownMenuItem<T>> items;
+  final List<T> options; // 👈 danh sách dữ liệu gốc
   final T? value;
   final ValueChanged<T?>? onChanged;
+  final String Function(T)? itemLabel; // 👈 hàm lấy text hiển thị
 
   const LabeledDropdown({
     super.key,
     required this.label,
     this.isRequired = false,
     this.hintText,
-    required this.items,
+    required this.options,
     this.value,
     this.onChanged,
+    this.itemLabel,
   });
 
   @override
   Widget build(BuildContext context) {
     final baseStyle = Theme.of(context).textTheme.bodyMedium;
-    final hasData = items.isNotEmpty;
+    final hasData = options.isNotEmpty;
 
-    final effectiveItems = hasData
-        ? items
+    // ✅ Tự map danh sách sang DropdownMenuItem
+    final items = hasData
+        ? options
+              .map(
+                (e) => DropdownMenuItem<T>(
+                  value: e,
+                  child: Text(
+                    itemLabel != null ? itemLabel!(e) : e.toString(),
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              )
+              .toList()
         : <DropdownMenuItem<T>>[
             DropdownMenuItem<T>(
               value: null,
@@ -71,7 +88,7 @@ class LabeledDropdown<T> extends StatelessWidget {
         DropdownButtonFormField2<T>(
           value: hasData ? value : null,
           onChanged: hasData ? onChanged : (val) {},
-          items: effectiveItems,
+          items: items,
           isExpanded: true,
           style: baseStyle?.copyWith(
             fontSize: 15.sp,
@@ -99,11 +116,11 @@ class LabeledDropdown<T> extends StatelessWidget {
           ),
           hint: Text(
             hasData ? (hintText ?? "") : "Chưa có dữ liệu",
-            style: TextStyle(color: Colors.grey, fontSize: 13.sp),
+            style: TextStyle(color: Colors.grey, fontSize: 15.sp),
           ),
           buttonStyleData: ButtonStyleData(
             padding: EdgeInsets.only(right: 8.w),
-            height: 40.h,
+            height: 36.h,
           ),
           iconStyleData: IconStyleData(
             icon: const Icon(Icons.keyboard_arrow_down_rounded),

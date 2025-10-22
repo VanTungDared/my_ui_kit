@@ -53,16 +53,6 @@ class _UiKitPreviewPageState extends State<UiKitPreviewPage> {
             ),
             SizedBox(height: 16.h),
 
-            LabeledDropdown<String>(
-              label: "Giới tính",
-              hintText: "Chọn giới tính",
-              items: const [
-                DropdownMenuItem(value: "Nam", child: Text("Nam")),
-                DropdownMenuItem(value: "Nữ", child: Text("Nữ")),
-              ],
-              value: dropdownValue,
-              onChanged: (v) => setState(() => dropdownValue = v),
-            ),
             SizedBox(height: 24.h),
 
             PrimaryButton(
